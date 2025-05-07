@@ -25,7 +25,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use("/api/health", (req, res) => {
+  res.json({
+    status: "OK",
+    dbState: mongoose.connection.readyState, // 1 = connected
+    timestamp: new Date(),
+  });
+});
+
 app.use("/api/user", require("./routes/userRoute"));
+
+// Add a health check route before your protected routes
+
 app.use(verifyJWT);
 app.use("/api/task", require("./routes/taskRoute"));
 

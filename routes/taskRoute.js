@@ -5,7 +5,7 @@ const {
   deleteTask,
   updateTask,
 } = require("../controllers/taskController");
-const verifyJWT = require("../middleware/verifyJWT");
+
 const router = express.Router();
 
 router.post("/", addNewTask);
